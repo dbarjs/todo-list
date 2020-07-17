@@ -1,5 +1,5 @@
 <template>
-  <v-layout column justify-center align-center>
+  <v-layout column justify-start align-start class="fill-height">
     <frame-list></frame-list>
   </v-layout>
 </template>
