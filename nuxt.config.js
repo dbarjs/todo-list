@@ -76,6 +76,20 @@ export default {
     },
     proxy: true,
   },
+  /**
+   * Prevent Cors errors
+   */
+  proxy: {
+    '/frames': {
+      target: 'http://api.todo.ootz.com.br/',
+      pathRewrite: { '^/frames/': '' },
+      changeOrigin: true,
+    },
+    '/frame': 'http://api.todo.ootz.com.br/',
+    '/frame/': 'http://api.todo.ootz.com.br/',
+    '/todo': 'http://api.todo.ootz.com.br/',
+    '/todo/': 'http://api.todo.ootz.com.br/',
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
@@ -95,21 +109,6 @@ export default {
           success: colors.green.accent3,
         },
       },
-    },
-  },
-  /**
-   * Prevent Cors error
-   */
-  proxy: {
-    '/frames': {
-      target: 'http://api.todo.ootz.com.br/',
-      pathRewrite: { '^/frames/': '' },
-      changeOrigin: true,
-    },
-    '/frame': {
-      target: 'http://api.todo.ootz.com.br/',
-      pathRewrite: { '^/frame/': '' },
-      changeOrigin: true,
     },
   },
   /*
