@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" width="320" transition="scroll-y-transition">
+  <v-card width="320" min-width="300" transition="scroll-y-transition">
     <v-btn v-if="!isFocused" block @click="setIsFocused(true)"
       >Add new frame...</v-btn
     >
@@ -13,10 +13,16 @@
       solo-inverted
       class="px-2 pt-2"
       @keydown.esc="setIsFocused(false)"
-      @keydown.enter="save"
+      @keydown.enter="create"
     ></v-text-field>
     <v-card-actions v-show="isFocused">
-      <v-btn color="success" @click="save">Add Frame</v-btn>
+      <v-btn
+        color="success"
+        @click="create"
+        :disabled="loading"
+        :loading="loading"
+        >Add Frame</v-btn
+      >
       <v-btn text @click="setIsFocused(false)">Cancel</v-btn>
     </v-card-actions>
   </v-card>
@@ -28,6 +34,7 @@ export default {
     return {
       title: '',
       isFocused: false,
+      loading: false,
     }
   },
   methods: {
@@ -40,10 +47,14 @@ export default {
         }, 100)
       }
     },
-    save() {
-      this.$store.dispatch('frames/createFrame', {
-        title: this.title,
-      })
+    async create() {
+      this.loading = true
+      const frame = await this.$store.dispatch('frames/createFrame', this.title)
+      if (frame.id) {
+        this.loading = false
+        this.isFocused = false
+        this.title = ''
+      }
     },
   },
 }
