@@ -1,5 +1,11 @@
 <template>
-  <v-card v-if="frame" class="mb-3 mr-3" min-width="300" width="320">
+  <v-card
+    v-if="frame"
+    class="mb-3 mr-3"
+    min-width="300"
+    width="320"
+    elevation="2"
+  >
     <v-container class="d-flex align-center">
       <v-icon class="handle pl-2">mdi-reorder-horizontal</v-icon>
       <v-card-title v-show="!isEditing" class="py-2" @click="isEditing = true">
