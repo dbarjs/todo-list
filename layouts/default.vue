@@ -6,7 +6,7 @@
     <v-main>
       <nuxt />
     </v-main>
-    <v-footer :absolute="!fixed" app>
+    <v-footer app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
@@ -18,7 +18,6 @@ export default {
     return {
       clipped: false,
       drawer: false,
-      fixed: false,
       items: [
         {
           icon: 'mdi-apps',
@@ -31,7 +30,6 @@ export default {
           to: '/inspire',
         },
       ],
-      miniVariant: false,
       right: true,
       rightDrawer: false,
       title: 'To-do List',
