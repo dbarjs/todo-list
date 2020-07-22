@@ -4,8 +4,8 @@
       Add new todo...
     </v-btn>
     <v-text-field
-      ref="titleTextField"
       v-show="isFocused"
+      ref="titleTextField"
       v-model="title"
       solo
       label="Enter todo title..."
@@ -18,11 +18,11 @@
     <v-card-actions v-show="isFocused">
       <v-btn
         color="success"
-        @click="create"
         :disabled="loading"
         :loading="loading"
+        @click="create"
       >
-        Add Frame
+        Add Todo
       </v-btn>
       <v-btn text @click="setIsFocused(false)">Cancel</v-btn>
     </v-card-actions>
@@ -55,15 +55,17 @@ export default {
       }
     },
     async create() {
-      this.loading = true
-      const todo = await this.$store.dispatch('frames/createTodo', {
-        frame: this.frame,
-        title: this.title,
-      })
-      if (todo?.id) {
-        this.loading = false
-        this.isFocused = false
-        this.title = ''
+      if (this.title) {
+        this.loading = true
+        const todo = await this.$store.dispatch('frames/createTodo', {
+          frame: this.frame,
+          title: this.title,
+        })
+        if (todo?.id) {
+          this.loading = false
+          this.isFocused = false
+          this.title = ''
+        }
       }
     },
   },
