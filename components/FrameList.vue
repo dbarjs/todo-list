@@ -1,6 +1,12 @@
 <template>
   <v-container class="frame-list mx-0 full-width">
-    <draggable :list="frameList" handle=".handle" @change="onChange">
+    <draggable
+      :list="frameList"
+      class="d-flex flex-column flex-md-row"
+      ghost-class="ghost"
+      handle=".handle"
+      @change="onChange"
+    >
       <frame
         v-for="frame in frameList"
         :key="frame.id"
@@ -68,6 +74,10 @@ export default {
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+}
+
+.ghost {
+  opacity: 0.4;
 }
 
 @media (min-width: 360px) {
