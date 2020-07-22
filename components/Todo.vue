@@ -29,7 +29,7 @@
         @click:append="updateTitle"
       ></v-text-field>
     </v-list-item-content>
-    <v-list-item-action class="flex-row align-center mr-2">
+    <v-list-item-action class="flex-row align-center mr-1">
       <v-btn
         v-if="!isEditing"
         icon
@@ -124,7 +124,7 @@ export default {
 
 <style>
 .is-checked {
-  opacity: 0.6;
+  opacity: 0.4;
   text-decoration: line-through;
 }
 </style>
