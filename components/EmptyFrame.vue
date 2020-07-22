@@ -1,11 +1,16 @@
 <template>
-  <v-card width="320" min-width="300" transition="scroll-y-transition">
-    <v-btn v-if="!isFocused" block @click="setIsFocused(true)"
-      >Add new frame...</v-btn
-    >
+  <v-card
+    width="320"
+    min-width="300"
+    transition="scroll-y-transition"
+    elevation="1"
+  >
+    <v-btn v-if="!isFocused" color="primary" block @click="setIsFocused(true)">
+      Add new frame...
+    </v-btn>
     <v-text-field
-      ref="titleTextField"
       v-show="isFocused"
+      ref="titleTextField"
       v-model="title"
       solo
       label="Enter frame title..."
@@ -18,9 +23,9 @@
     <v-card-actions v-show="isFocused">
       <v-btn
         color="success"
-        @click="create"
         :disabled="loading"
         :loading="loading"
+        @click="create"
         >Add Frame</v-btn
       >
       <v-btn text @click="setIsFocused(false)">Cancel</v-btn>
