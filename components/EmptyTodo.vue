@@ -1,5 +1,5 @@
 <template>
-  <v-card width="100%" transition="scroll-y-transition">
+  <v-card width="100%" flat transition="scroll-y-transition">
     <v-btn v-if="!isFocused" block @click="setIsFocused(true)">
       Add new todo...
     </v-btn>
