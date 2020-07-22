@@ -1,6 +1,7 @@
 <template>
   <v-card v-if="frame" class="mb-3 mr-3" min-width="300" width="320">
     <v-container class="d-flex align-center">
+      <v-icon class="handle pl-2">mdi-reorder-horizontal</v-icon>
       <v-card-title v-show="!isEditing" class="py-2" @click="isEditing = true">
         {{ frame.title }}
       </v-card-title>
@@ -18,10 +19,10 @@
       ></v-text-field>
       <v-spacer></v-spacer>
       <v-btn color="warning" icon @click="remove">
-        <v-icon>mdi-delete</v-icon>
+        <v-icon>mdi-delete-outline</v-icon>
       </v-btn>
     </v-container>
-    <todo-list :todos="frame.todos"></todo-list>
+    <todo-list :frame-id="frame.id"></todo-list>
     <v-card-actions>
       <empty-todo :frame="frame"></empty-todo>
     </v-card-actions>
@@ -37,9 +38,9 @@ export default {
     TodoList,
   },
   props: {
-    frame: {
-      default: null,
-      type: [Object, null],
+    frameId: {
+      default: false,
+      type: [String, Boolean],
     },
   },
   data() {
@@ -48,6 +49,13 @@ export default {
       isEditing: false,
       isLoading: false,
     }
+  },
+  computed: {
+    frame() {
+      return this.frameId
+        ? this.$store.getters['frames/getFrameById'](this.frameId)
+        : null
+    },
   },
   watch: {
     'frame.title': {
@@ -74,7 +82,6 @@ export default {
     },
     async updateTitle() {
       if (this.title !== this.frame.title) {
-        console.log('oiii')
         this.isLoading = true
         await this.$store.dispatch('frames/updateFrame', {
           ...this.frame,
@@ -87,3 +94,9 @@ export default {
   },
 }
 </script>
+
+<style>
+.handle {
+  cursor: pointer;
+}
+</style>
